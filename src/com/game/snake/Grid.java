@@ -18,7 +18,7 @@ public class Grid {
 		init();
 	}
 	
-	private void init() {
+	public void init() {
 		// Initialize the background
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
