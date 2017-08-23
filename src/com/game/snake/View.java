@@ -19,6 +19,7 @@ public class View {
 			public void paintComponent(Graphics graphics) {
 				drawGridBackground(graphics);
 				drawSnake(graphics, grid.getSnake());
+				drawBarrier(graphics, grid.getBarrier());
 				drawFood(graphics, grid.getFood());
 			}
 		};
@@ -27,6 +28,11 @@ public class View {
 	public void draw() {
         canvas.repaint();
     }
+	
+	// Draw the barrier
+	public void drawBarrier(Graphics graphics, Node barrier) {
+		drawSquare(graphics, barrier, Settings.DEFAULT_BARRIER_COLOR);
+	}
 	
 	// Draw the food
 	public void drawFood(Graphics graphics, Node food) {

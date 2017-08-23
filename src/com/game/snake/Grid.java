@@ -8,7 +8,10 @@ public class Grid {
 	
 	private Snake snake;
 	private Node food;	
+	private Node barrier;
 	private Direction snakeDirection = Direction.LEFT;
+	
+	private int speed;
 	
 	public Grid(int width, int height) {
 		this.width = width;
@@ -32,14 +35,18 @@ public class Grid {
 		// Initialize the snake
 		initSnake();
 		
+		// Initialize the barrier
+		createBarrier();
+		
 		// Initialize the food
 		createFood();
 	}
 	
 	private Snake initSnake() {
 		snake = new Snake();
+		speed = 0;
 		
-		int originalLen = width / 3;
+		int originalLen = width / 10;
 		for (int i = originalLen - 1; i >= 0; i--) {
 			snake.getBody().offerFirst(new Node(width / 2 + i, height / 2));
 			status[width / 2 + i][height / 2] = true;
@@ -67,6 +74,20 @@ public class Grid {
 		}
 	}
 	
+	private Node createBarrier() {
+		int x;
+		int y;
+		
+		do {
+			x = (int) (Math.random() * width);
+			y = (int) (Math.random() * height);
+		} while (status[x][y]);
+		
+		barrier = new Node(x, y);
+		status[x][y] = true;
+		return barrier;
+	}
+	
 	public boolean nextRound() {
 		Node tail = snake.move(snakeDirection);
 		Node head = snake.getHead();
@@ -74,6 +95,10 @@ public class Grid {
 		if (validPosition(head)) {
 			if (isFood(head)) {
 				getSnake().addTail(tail);
+				if (speed < 110) {
+					speed += 5;
+				}
+				createBarrier();
 				createFood();
 			} else {
 				dispose(tail);
@@ -108,6 +133,10 @@ public class Grid {
     	return false;
     }
     
+    public Node getBarrier() {
+    	return barrier;
+    }
+    
     public Node getFood() {
     	return food;
     }
@@ -122,5 +151,9 @@ public class Grid {
     
     public Snake getSnake() {
     	return snake;
+    }
+    
+    public int getSpeed() {
+    	return speed;
     }
 }

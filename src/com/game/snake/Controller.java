@@ -67,21 +67,23 @@ public class Controller implements Runnable, KeyListener {
 	public void run() {
 		while (running) {
 			try {
-				Thread.sleep(150);
+				Thread.sleep(Settings.DEFAULT_MOVE_INTERVAL - getGrid().getSpeed());
 			} catch (InterruptedException en) {
 				break;
 			}
 			
 			if (running) {
                 view.draw();
+                running = grid.nextRound();
             } else {
                 running = false;
                 break;
-
             }
-            running = grid.nextRound();
         }
-
         running = false;
+	}
+	
+	public Grid getGrid() {
+		return grid;
 	}
 }
