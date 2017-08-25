@@ -25,6 +25,10 @@ public class View {
 		};
 	}
 	
+	public void showGameOverMessage() {
+        JOptionPane.showMessageDialog(null, "游戏结束", "游戏结束", JOptionPane.INFORMATION_MESSAGE);
+    }
+	
 	public void draw() {
         canvas.repaint();
     }
