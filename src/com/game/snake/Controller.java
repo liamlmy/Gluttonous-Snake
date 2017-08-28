@@ -64,19 +64,11 @@ public class Controller implements Runnable, KeyListener {
 			}
 
 			if (grid.nextRound()) {
-                view.draw();
-            } else {
-                view.showGameOverMessage();
-                break;
-            }
-			
-//			if (running) {
-//				view.draw();
-//				running = grid.nextRound();
-//			} else {
-//				running = false;
-//				break;
-//			}
+                		view.draw();
+            		} else {
+                		view.showGameOverMessage();
+                		break;
+            		}
 		}
 		running = false;
 	}
